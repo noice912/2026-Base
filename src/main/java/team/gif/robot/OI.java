@@ -1,9 +1,14 @@
 package team.gif.robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj2.command.RepeatCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-public class OI {
+import team.gif.robot.commands.TimeStamp;
+import team.gif.robot.commands.module1.PrintTimestamp;
+
+public class
+OI {
     /*
      * Instantiate all joysticks/controllers and their buttons here
      *
@@ -88,6 +93,9 @@ public class OI {
          * Simple Test:
          *   aX.onTrue(new PrintCommand("aX"));
          */
+
+        // Game 1
+        dA.onTrue(new TimeStamp());
 
 
 
