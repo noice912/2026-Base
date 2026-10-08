@@ -52,4 +52,7 @@ public abstract class RobotMap {
     }
 
     public static final int PIGEON_ID = 9;
+
+    // DIO (Digital Input/Output) channels on the RoboRIO
+    public static final int LIMIT_SWITCH_ID = 9;
 }
