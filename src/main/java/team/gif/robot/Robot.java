@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import team.gif.robot.commands.drivetrain.DriveSwerve;
+import team.gif.robot.subsystems.CIMMotor;
 import team.gif.robot.subsystems.LimitSwitch;
 import team.gif.robot.subsystems.drivers.Pigeon2_0;
 import team.gif.robot.subsystems.drivers.swerve.utilities.SwerveConfiguration;
@@ -30,6 +31,7 @@ public class Robot extends TimedRobot {
 
     public static Pigeon2_0 pigeon;
     public static LimitSwitch limitSwitch;
+    public static CIMMotor cimMotor;
     private boolean lastLimitSwitchState;
 
     public static SwerveConfiguration swerveConfig;
@@ -62,6 +64,8 @@ public class Robot extends TimedRobot {
         limitSwitch = new LimitSwitch();
         lastLimitSwitchState = limitSwitch.isPressed();
         System.out.println("Limit switch pressed: " + lastLimitSwitchState);
+
+        cimMotor = new CIMMotor();
 
         //These should be at or near the bottom
         oi = new OI();

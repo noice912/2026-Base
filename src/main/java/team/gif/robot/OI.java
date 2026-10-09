@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.RepeatCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import team.gif.robot.commands.RunCIMMotor;
 import team.gif.robot.commands.TimeStamp;
 import team.gif.robot.commands.module1.PrintTimestamp;
 
@@ -96,6 +97,10 @@ OI {
 
         // Game 1
         dA.onTrue(new TimeStamp());
+
+        // Objective 1.4 - run the CIM motor while X (forward) or Y (backward) is held
+        dX.whileTrue(new RunCIMMotor(Constants.CIM_MOTOR_PERCENT));
+        dY.whileTrue(new RunCIMMotor(-Constants.CIM_MOTOR_PERCENT));
 
 
 

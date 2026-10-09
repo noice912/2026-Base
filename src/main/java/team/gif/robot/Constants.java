@@ -19,6 +19,9 @@ import team.gif.robot.subsystems.drivers.swerve.utilities.SwerveConstants;
 public final class Constants {
     public static final double DEBOUNCE_DEFAULT = 0.020;
 
+    // Percent output for the CIM motor (-1.0 to 1.0). Start low when testing.
+    public static final double CIM_MOTOR_PERCENT = 0.3;
+
     //These constants should be referenced via Robot.swerveDrive.getConstants();
     public static final class Mk4Constants extends SwerveConstants {
         @Override
