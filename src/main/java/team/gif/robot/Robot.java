@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import team.gif.robot.commands.drivetrain.DriveSwerve;
 import team.gif.robot.subsystems.LimitSwitch;
+import team.gif.robot.subsystems.drivers.Pigeon;
 import team.gif.robot.subsystems.drivers.Pigeon2_0;
 import team.gif.robot.subsystems.drivers.swerve.utilities.SwerveConfiguration;
 import team.gif.robot.subsystems.drivers.swerve.SwerveDrivetrain;
@@ -28,7 +29,7 @@ public class Robot extends TimedRobot {
     private RobotContainer robotContainer;
     public static OI oi;
 
-    public static Pigeon2_0 pigeon;
+    public static Pigeon pigeon;
     public static LimitSwitch limitSwitch;
     private boolean lastLimitSwitchState;
 
@@ -50,7 +51,7 @@ public class Robot extends TimedRobot {
         // autonomous chooser on the dashboard.
         robotContainer = new RobotContainer();
 
-        pigeon = new Pigeon2_0(RobotMap.PIGEON_ID);
+        pigeon = new Pigeon(RobotMap.PIGEON_ID);
 
         swerveConfig = new SwerveConfiguration(new RobotMap.Mk4Map(), new Constants.Mk4Constants(), TalonFXDriveMotor::new, TalonFXTurnMotor::new, CANCoderEncoder::new);
 //        swerveConfig = new SwerveConfiguration(new RobotMap.Mk3Map(), new Constants.Mk3Constants(), SparkMaxDriveMotor::new, TalonSRXTurnMotorEncoder::new, null);
@@ -79,6 +80,8 @@ public class Robot extends TimedRobot {
         CommandScheduler.getInstance().run();
 
         ui.update();
+
+        System.out.println(pigeon.get180Heading());
 
 
         boolean limitSwitchState = limitSwitch.isPressed();

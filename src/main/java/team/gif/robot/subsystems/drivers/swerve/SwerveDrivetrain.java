@@ -128,7 +128,7 @@ public class SwerveDrivetrain extends SubsystemBase {
             getPosition()
         );
 
-        if (Robot.pigeon.getYawRate() < 720) {
+        /*if (Robot.pigeon.getYawRate() < 720) {
             for (String limelightName : limelightNames) {
                 LimelightHelpers.PoseEstimate estimate = LimelightHelpers.getBotPoseEstimate_wpiRed_MegaTag2(limelightName);
                 if(limelightEnabled && estimate != null && estimate.tagCount > 0) {
@@ -138,7 +138,7 @@ public class SwerveDrivetrain extends SubsystemBase {
                             estimate.timestampSeconds);
                 }
             }
-        }
+        }*/
 
         if (debugMode) {
             posePublisher.set(poseEstimator.getEstimatedPosition());
