@@ -7,8 +7,10 @@ package team.gif.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import team.gif.robot.commands.ArcadeDrive;
 import team.gif.robot.commands.CIMJoystickControl;
 import team.gif.robot.subsystems.CIMMotor;
+import team.gif.robot.subsystems.Drivetrain;
 import team.gif.robot.subsystems.LimitSwitch;
 import team.gif.robot.subsystems.NEOMotor;
 import team.gif.robot.subsystems.Piston;
@@ -32,6 +34,7 @@ public class Robot extends TimedRobot {
     public static CIMMotor cimMotor;
     public static NEOMotor neoMotor;
     public static Piston piston;
+    public static Drivetrain drivetrain;
     private boolean lastLimitSwitchState;
 
 
@@ -57,6 +60,7 @@ public class Robot extends TimedRobot {
         cimMotor = new CIMMotor();
         neoMotor = new NEOMotor();
         piston = new Piston();
+        drivetrain = new Drivetrain();
 
         //These should be at or near the bottom
         oi = new OI();
@@ -64,6 +68,9 @@ public class Robot extends TimedRobot {
 
         // Objective 1.5 - the right joystick controls the CIM whenever X/Y aren't held
         cimMotor.setDefaultCommand(new CIMJoystickControl());
+
+        // Objective 1.12 - the left joystick drives the drivetrain with arcade drive
+        drivetrain.setDefaultCommand(new ArcadeDrive());
 
     }
 

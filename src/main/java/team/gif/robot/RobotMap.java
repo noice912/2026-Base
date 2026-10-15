@@ -9,6 +9,12 @@ public abstract class RobotMap {
 
 
 
+    // Drivetrain TalonSRXs - placeholders, set to your drivetrain's CAN IDs
+    public static final int DRIVE_LEFT_FRONT_ID = 1;
+    public static final int DRIVE_LEFT_REAR_ID = 2;
+    public static final int DRIVE_RIGHT_FRONT_ID = 3;
+    public static final int DRIVE_RIGHT_REAR_ID = 4;
+
     public static final int PIGEON_ID = 9;
     public static final int CIM_MOTOR_ID = 10;
     public static final int NEO_MOTOR_ID = 45; // SparkMAX
