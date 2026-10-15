@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj2.command.RepeatCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import team.gif.robot.commands.NEOGoToPosition;
+import team.gif.robot.commands.NEORunAtVelocity;
 import team.gif.robot.commands.RunCIMMotor;
 import team.gif.robot.commands.RunNEOVoltage;
 import team.gif.robot.commands.TimeStamp;
@@ -111,6 +112,9 @@ OI {
         // Objective 1.8 - right bumper sends the NEO to the setpoint, left bumper sends it back to 0
         dRBump.onTrue(new NEOGoToPosition(Constants.NEO_POSITION_SETPOINT));
         dLBump.onTrue(new NEOGoToPosition(0));
+
+        // Objective 1.9 - run the NEO at a set RPM while the right trigger is held
+        dRTrigger.whileTrue(new NEORunAtVelocity(Constants.NEO_VELOCITY_RPM));
 
 
 

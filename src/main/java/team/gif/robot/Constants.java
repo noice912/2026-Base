@@ -34,6 +34,13 @@ public final class Constants {
     public static final double NEO_POSITION_KD = 0.0;
     public static final double NEO_POSITION_MAX_OUTPUT = 0.3; // max percent output while moving to the setpoint
 
+    // NEO velocity control (units are RPM, output is volts)
+    public static final double NEO_VELOCITY_RPM = 1000.0;
+    public static final double NEO_VELOCITY_KV = 12.0 / 5676.0; // volts per RPM (NEO free speed is ~5676 RPM at 12V)
+    public static final double NEO_VELOCITY_KP = 0.001; // volts per RPM of error
+    public static final double NEO_VELOCITY_KI = 0.0;
+    public static final double NEO_VELOCITY_KD = 0.0;
+
     //These constants should be referenced via Robot.swerveDrive.getConstants();
 
     public static final class Joystick {

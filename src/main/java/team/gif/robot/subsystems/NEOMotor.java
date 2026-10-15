@@ -54,6 +54,13 @@ public class NEOMotor extends SubsystemBase {
     }
 
     /**
+     * @return the motor's velocity in RPM (rotations per minute)
+     */
+    public double getVelocity() {
+        return encoder.getVelocity();
+    }
+
+    /**
      * Runs the motor using voltage control
      * @param volts -12 (full backward) to 12 (full forward), 0 stops the motor
      */

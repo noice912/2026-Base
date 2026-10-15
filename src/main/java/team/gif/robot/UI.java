@@ -32,5 +32,8 @@ public class UI {
 
         // Objective 1.8 - NEO position (rotations) on Elastic
         SmartDashboard.putNumber("NEO Position", Robot.neoMotor.getPosition());
+
+        // Objective 1.9 - NEO velocity (RPM) on Elastic
+        SmartDashboard.putNumber("NEO Velocity (RPM)", Robot.neoMotor.getVelocity());
     }
 }
