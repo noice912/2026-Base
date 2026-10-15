@@ -21,6 +21,9 @@ public final class Constants {
     // Percent output for the CIM motor (-1.0 to 1.0). Start low when testing.
     public static final double CIM_MOTOR_PERCENT = 0.3;
 
+    // CIM power is multiplied by this while the limit switch is pressed (0.5 = half power)
+    public static final double CIM_LIMIT_SWITCH_SCALE = 0.5;
+
     // Voltage for the NEO motor (-12 to 12). Start low when testing.
     public static final double NEO_VOLTAGE = 3.0;
 

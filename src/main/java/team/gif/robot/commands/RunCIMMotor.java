@@ -18,13 +18,14 @@ public class RunCIMMotor extends Command {
 
     // Called when the command is initially scheduled.
     @Override
-    public void initialize() {
-        Robot.cimMotor.setPercent(percent);
-    }
+    public void initialize() {}
 
     // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
-    public void execute() {}
+    public void execute() {
+        // Set every loop so the limit switch (objective 1.10) is checked while the button is held
+        Robot.cimMotor.setPercent(percent);
+    }
 
     // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
