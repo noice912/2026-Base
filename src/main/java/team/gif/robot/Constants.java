@@ -21,6 +21,9 @@ public final class Constants {
     // Percent output for the CIM motor (-1.0 to 1.0). Start low when testing.
     public static final double CIM_MOTOR_PERCENT = 0.3;
 
+    // Voltage for the NEO motor (-12 to 12). Start low when testing.
+    public static final double NEO_VOLTAGE = 3.0;
+
     //These constants should be referenced via Robot.swerveDrive.getConstants();
 
     public static final class Joystick {

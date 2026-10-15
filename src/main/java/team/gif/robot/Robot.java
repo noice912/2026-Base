@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import team.gif.robot.commands.CIMJoystickControl;
 import team.gif.robot.subsystems.CIMMotor;
 import team.gif.robot.subsystems.LimitSwitch;
+import team.gif.robot.subsystems.NEOMotor;
 import team.gif.robot.subsystems.drivers.Pigeon;
 import team.gif.robot.subsystems.drivers.Pigeon2_0;
 
@@ -28,6 +29,7 @@ public class Robot extends TimedRobot {
     public static Pigeon pigeon;
     public static LimitSwitch limitSwitch;
     public static CIMMotor cimMotor;
+    public static NEOMotor neoMotor;
     private boolean lastLimitSwitchState;
 
 
@@ -51,6 +53,7 @@ public class Robot extends TimedRobot {
         System.out.println("Limit switch pressed: " + lastLimitSwitchState);
 
         cimMotor = new CIMMotor();
+        neoMotor = new NEOMotor();
 
         //These should be at or near the bottom
         oi = new OI();

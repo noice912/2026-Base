@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj2.command.RepeatCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import team.gif.robot.commands.RunCIMMotor;
+import team.gif.robot.commands.RunNEOVoltage;
 import team.gif.robot.commands.TimeStamp;
 import team.gif.robot.commands.module1.PrintTimestamp;
 
@@ -101,6 +102,10 @@ OI {
         // Objective 1.4 - run the CIM motor while X (forward) or Y (backward) is held
         dX.whileTrue(new RunCIMMotor(Constants.CIM_MOTOR_PERCENT));
         dY.whileTrue(new RunCIMMotor(-Constants.CIM_MOTOR_PERCENT));
+
+        // Objective 1.6 - run the NEO with voltage control while D-pad up (forward) or down (backward) is held
+        dDPadUp.whileTrue(new RunNEOVoltage(Constants.NEO_VOLTAGE));
+        dDPadDown.whileTrue(new RunNEOVoltage(-Constants.NEO_VOLTAGE));
 
 
 
