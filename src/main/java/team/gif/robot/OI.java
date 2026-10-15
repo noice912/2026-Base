@@ -1,6 +1,7 @@
 package team.gif.robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RepeatCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -115,6 +116,9 @@ OI {
 
         // Objective 1.9 - run the NEO at a set RPM while the right trigger is held
         dRTrigger.whileTrue(new NEORunAtVelocity(Constants.NEO_VELOCITY_RPM));
+
+        // Objective 1.11 - toggle the double solenoid each time B is pressed
+        dB.onTrue(new InstantCommand(Robot.piston::toggle, Robot.piston));
 
 
 

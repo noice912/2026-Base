@@ -11,6 +11,7 @@ import team.gif.robot.commands.CIMJoystickControl;
 import team.gif.robot.subsystems.CIMMotor;
 import team.gif.robot.subsystems.LimitSwitch;
 import team.gif.robot.subsystems.NEOMotor;
+import team.gif.robot.subsystems.Piston;
 import team.gif.robot.subsystems.drivers.Pigeon;
 import team.gif.robot.subsystems.drivers.Pigeon2_0;
 
@@ -30,6 +31,7 @@ public class Robot extends TimedRobot {
     public static LimitSwitch limitSwitch;
     public static CIMMotor cimMotor;
     public static NEOMotor neoMotor;
+    public static Piston piston;
     private boolean lastLimitSwitchState;
 
 
@@ -54,6 +56,7 @@ public class Robot extends TimedRobot {
 
         cimMotor = new CIMMotor();
         neoMotor = new NEOMotor();
+        piston = new Piston();
 
         //These should be at or near the bottom
         oi = new OI();
