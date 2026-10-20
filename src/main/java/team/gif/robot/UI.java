@@ -29,5 +29,8 @@ public class UI {
         // Objective 1.7 - limit switch state and Pigeon heading on Elastic
         SmartDashboard.putBoolean("Limit Switch", Robot.limitSwitch.isPressed());
         SmartDashboard.putNumber("Pigeon Heading", Robot.pigeon.get180Heading());
+
+        // Objective 1.8 - NEO position (rotations) on Elastic
+        SmartDashboard.putNumber("NEO Position", Robot.neoMotor.getPosition());
     }
 }

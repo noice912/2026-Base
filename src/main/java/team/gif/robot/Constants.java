@@ -27,6 +27,13 @@ public final class Constants {
     // Current limit for the NEO in amps (protects the motor, from the REV config docs)
     public static final int NEO_CURRENT_LIMIT = 50;
 
+    // NEO position control (units are motor rotations)
+    public static final double NEO_POSITION_SETPOINT = 10.0;
+    public static final double NEO_POSITION_KP = 0.1;
+    public static final double NEO_POSITION_KI = 0.0;
+    public static final double NEO_POSITION_KD = 0.0;
+    public static final double NEO_POSITION_MAX_OUTPUT = 0.3; // max percent output while moving to the setpoint
+
     //These constants should be referenced via Robot.swerveDrive.getConstants();
 
     public static final class Joystick {

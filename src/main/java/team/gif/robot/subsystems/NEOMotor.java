@@ -1,6 +1,7 @@
 package team.gif.robot.subsystems;
 
 import com.revrobotics.PersistMode;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
@@ -16,6 +17,7 @@ import team.gif.robot.RobotMap;
  */
 public class NEOMotor extends SubsystemBase {
     private final SparkMax motor;
+    private final RelativeEncoder encoder;
 
     public NEOMotor() {
         // The motor type is set here, not in the config. A NEO is brushless,
@@ -30,6 +32,25 @@ public class NEOMotor extends SubsystemBase {
         // Reset to safe defaults, then apply our settings. Persist them so the SparkMAX
         // keeps this configuration after a power cycle (brownout or breaker trip).
         motor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+
+        // The NEO's built-in encoder, counts in motor rotations. Start at 0 when the robot code boots.
+        encoder = motor.getEncoder();
+        encoder.setPosition(0);
+    }
+
+    /**
+     * Runs the motor using percent output
+     * @param percent -1.0 (full backward) to 1.0 (full forward), 0 stops the motor
+     */
+    public void setPercent(double percent) {
+        motor.set(percent);
+    }
+
+    /**
+     * @return the motor's position in rotations
+     */
+    public double getPosition() {
+        return encoder.getPosition();
     }
 
     /**
