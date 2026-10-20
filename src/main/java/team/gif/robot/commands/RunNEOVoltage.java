@@ -20,7 +20,7 @@ public class RunNEOVoltage extends Command {
     @Override
     public void initialize() {}
 
-    // Called every time the scheduler runs (~20ms) while the command is scheduled
+
     @Override
     public void execute() {
         Robot.neoMotor.setVoltage(volts);
