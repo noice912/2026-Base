@@ -13,9 +13,6 @@ public abstract class RobotMap {
     public static final int CIM_MOTOR_ID = 10;
     public static final int NEO_MOTOR_ID = 45; // SparkMAX
 
-    // PWM ports on the RoboRIO
-    public static final int NEO_PWM_PORT = 0; // SparkMAX signal cable - placeholder, set to the PWM port it's plugged into
-
     // DIO (Digital Input/Output) channels on the RoboRIO
     public static final int LIMIT_SWITCH_ID = 9;
 }

@@ -24,6 +24,9 @@ public final class Constants {
     // Voltage for the NEO motor (-12 to 12). Start low when testing.
     public static final double NEO_VOLTAGE = 3.0;
 
+    // Current limit for the NEO in amps (protects the motor, from the REV config docs)
+    public static final int NEO_CURRENT_LIMIT = 50;
+
     //These constants should be referenced via Robot.swerveDrive.getConstants();
 
     public static final class Joystick {
