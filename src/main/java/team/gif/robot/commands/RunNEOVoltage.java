@@ -32,7 +32,7 @@ public class RunNEOVoltage extends Command {
         return false; // keep running until the button is released
     }
 
-    // Called when the command ends or is interrupted.
+
     @Override
     public void end(boolean interrupted) {
         Robot.neoMotor.setVoltage(0); // stop the motor when the button is released
