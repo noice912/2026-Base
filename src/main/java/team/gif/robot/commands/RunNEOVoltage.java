@@ -26,7 +26,7 @@ public class RunNEOVoltage extends Command {
         Robot.neoMotor.setVoltage(volts);
     }
 
-    // Return true when the command should end, false if it should continue. Runs every ~20ms.
+    //
     @Override
     public boolean isFinished() {
         return false; // keep running until the button is released
