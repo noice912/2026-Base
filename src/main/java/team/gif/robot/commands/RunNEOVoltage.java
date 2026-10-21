@@ -1,18 +1,19 @@
 package team.gif.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import team.gif.robot.Constants;
 import team.gif.robot.Robot;
 
 public class RunNEOVoltage extends Command {
-    private final double volts;
+
 
     /**
      * Objective 1.6 - Runs the NEO motor at a voltage until the command ends
-     * @param volts positive = forward, negative = backward
+     * @param   = forward, negative = backward
      */
-    public RunNEOVoltage(double volts) {
+    public RunNEOVoltage() {
         super();
-        this.volts = volts;
+
         addRequirements(Robot.neoMotor);
     }
 
@@ -23,18 +24,18 @@ public class RunNEOVoltage extends Command {
 
     @Override
     public void execute() {
-        Robot.neoMotor.setVoltage(volts);
+        Robot.neoMotor.setVoltage(Constants.SPARK_MOTOR_VOLTAGE);
     }
 
     //
     @Override
     public boolean isFinished() {
-        return false; // keep running until the button is released
+        return false;
     }
 
 
     @Override
     public void end(boolean interrupted) {
-        Robot.neoMotor.setVoltage(0); // stop the motor when the button is released
+        Robot.neoMotor.setVoltage(0);
     }
 }
