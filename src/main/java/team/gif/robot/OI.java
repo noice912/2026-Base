@@ -103,10 +103,11 @@ OI {
         // Objective 1.4 - run the CIM motor while X (forward) or Y (backward) is held
         dX.whileTrue(new RunCIMMotor(Constants.CIM_MOTOR_PERCENT));
         dY.whileTrue(new RunCIMMotor(-Constants.CIM_MOTOR_PERCENT));
+        dA.whileTrue(new RunNEOVoltage());
 
         // Objective 1.6 - run the NEO with voltage control while D-pad up (forward) or down (backward) is held
-        dDPadUp.whileTrue(new RunNEOVoltage(Constants.NEO_VOLTAGE));
-        dDPadDown.whileTrue(new RunNEOVoltage(-Constants.NEO_VOLTAGE));
+       /* dDPadUp.whileTrue(new RunNEOVoltage(Constants.NEO_VOLTAGE));
+        dDPadDown.whileTrue(new RunNEOVoltage(-Constants.NEO_VOLTAGE));*/
 
         // Objective 1.8 - right bumper sends the NEO to the setpoint, left bumper sends it back to 0
         dRBump.onTrue(new NEOGoToPosition(Constants.NEO_POSITION_SETPOINT));

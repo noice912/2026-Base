@@ -5,6 +5,7 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.config.SparkBaseConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -20,18 +21,12 @@ public class NEOMotor extends SubsystemBase {
     private final RelativeEncoder encoder;
 
     public NEOMotor() {
-        // The motor type is set here, not in the config. A NEO is brushless,
-        // and running a brushless motor in brushed mode can permanently damage it.
+
         motor = new SparkMax(RobotMap.NEO_MOTOR_ID, MotorType.kBrushless);
-
-        SparkMaxConfig config = new SparkMaxConfig();
-        config
-            .smartCurrentLimit(Constants.NEO_CURRENT_LIMIT)
-            .idleMode(IdleMode.kBrake);
-
-        // Reset to safe defaults, then apply our settings. Persist them so the SparkMAX
-        // keeps this configuration after a power cycle (brownout or breaker trip).
-        motor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+        SparkMaxConfig motorConfig = new SparkMaxConfig();
+        motorConfig.idleMode(SparkBaseConfig.IdleMode.kBrake);
+        motorConfig.inverted(true);
+        motor.configure(motorConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
         // The NEO's built-in encoder, counts in motor rotations. Start at 0 when the robot code boots.
         encoder = motor.getEncoder();
@@ -53,11 +48,9 @@ public class NEOMotor extends SubsystemBase {
         return encoder.getPosition();
     }
 
-    /**
-     * Runs the motor using voltage control
-     * @param volts -12 (full backward) to 12 (full forward), 0 stops the motor
-     */
+
     public void setVoltage(double volts) {
         motor.setVoltage(volts);
     }
+
 }

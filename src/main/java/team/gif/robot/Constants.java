@@ -26,6 +26,7 @@ public final class Constants {
 
     // Current limit for the NEO in amps (protects the motor, from the REV config docs)
     public static final int NEO_CURRENT_LIMIT = 50;
+    public static final double SPARK_MOTOR_VOLTAGE = 2.5;
 
     // NEO position control (units are motor rotations)
     public static final double NEO_POSITION_SETPOINT = 10.0;
@@ -38,5 +39,8 @@ public final class Constants {
 
     public static final class Joystick {
         public static final double DEADBAND = 0.1;
+
+    //These constants are for neo-voltage percentage %
+
     }
 }
