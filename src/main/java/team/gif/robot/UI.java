@@ -23,10 +23,7 @@ public class UI {
      *     SmartDashboard.putString("Elevator", String.format("%11.2f", Elevator.getPosition());
      */
     public void update() {
-        //Example
-        //SmartDashboard.putNumber("Climber Position", Robot.elevator.getPosition())
 
-        // Objective 1.7 - limit switch state and Pigeon heading on Elastic
         SmartDashboard.putBoolean("Limit Switch", Robot.limitSwitch.isPressed());
         SmartDashboard.putNumber("Pigeon Heading", Robot.pigeon.get180Heading());
 
