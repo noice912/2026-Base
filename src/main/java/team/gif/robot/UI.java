@@ -27,10 +27,8 @@ public class UI {
         SmartDashboard.putBoolean("Limit Switch", Robot.limitSwitch.isPressed());
         SmartDashboard.putNumber("Pigeon Heading", Robot.pigeon.get180Heading());
 
-        // Objective 1.8 - NEO position (rotations) on Elastic
         SmartDashboard.putNumber("NEO Position", Robot.neoMotor.getPosition());
 
-        // Objective 1.9 - NEO velocity (RPM) on Elastic
         SmartDashboard.putNumber("NEO Velocity (RPM)", Robot.neoMotor.getVelocity());
     }
 }
