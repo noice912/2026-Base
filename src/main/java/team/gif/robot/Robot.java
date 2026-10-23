@@ -11,7 +11,6 @@ import team.gif.robot.commands.CIMJoystickControl;
 import team.gif.robot.subsystems.CIMMotor;
 import team.gif.robot.subsystems.LimitSwitch;
 import team.gif.robot.subsystems.drivers.Pigeon;
-import team.gif.robot.subsystems.drivers.Pigeon2_0;
 
 
 /**
@@ -56,7 +55,6 @@ public class Robot extends TimedRobot {
         oi = new OI();
         ui = new UI();
 
-        // Objective 1.5 - the right joystick controls the CIM whenever X/Y aren't held
         cimMotor.setDefaultCommand(new CIMJoystickControl());
 
     }
