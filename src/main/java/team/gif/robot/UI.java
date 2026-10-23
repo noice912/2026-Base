@@ -26,14 +26,11 @@ public class UI {
         //Example
         //SmartDashboard.putNumber("Climber Position", Robot.elevator.getPosition())
 
-        // Objective 1.7 - limit switch state and Pigeon heading on Elastic
         SmartDashboard.putBoolean("Limit Switch", Robot.limitSwitch.isPressed());
         SmartDashboard.putNumber("Pigeon Heading", Robot.pigeon.get180Heading());
 
-        // Objective 1.8 - NEO position (rotations) on Elastic
         SmartDashboard.putNumber("NEO Position", Robot.neoMotor.getPosition());
 
-        // Objective 1.9 - NEO velocity (RPM) on Elastic
         SmartDashboard.putNumber("NEO Velocity (RPM)", Robot.neoMotor.getVelocity());
     }
 }

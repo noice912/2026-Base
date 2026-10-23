@@ -15,7 +15,6 @@ import team.gif.robot.subsystems.LimitSwitch;
 import team.gif.robot.subsystems.NEOMotor;
 import team.gif.robot.subsystems.Piston;
 import team.gif.robot.subsystems.drivers.Pigeon;
-import team.gif.robot.subsystems.drivers.Pigeon2_0;
 
 
 /**
@@ -66,10 +65,8 @@ public class Robot extends TimedRobot {
         oi = new OI();
         ui = new UI();
 
-        // Objective 1.5 - the right joystick controls the CIM whenever X/Y aren't held
         cimMotor.setDefaultCommand(new CIMJoystickControl());
 
-        // Objective 1.12 - the left joystick drives the drivetrain with arcade drive
         drivetrain.setDefaultCommand(new ArcadeDrive());
 
     }
