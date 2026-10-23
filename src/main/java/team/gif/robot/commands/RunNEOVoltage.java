@@ -7,10 +7,6 @@ import team.gif.robot.Robot;
 public class RunNEOVoltage extends Command {
 
 
-    /**
-     * Objective 1.6 - Runs the NEO motor at a voltage until the command ends
-     * @param   = forward, negative = backward
-     */
     public RunNEOVoltage() {
         super();
 
@@ -27,7 +23,6 @@ public class RunNEOVoltage extends Command {
         Robot.neoMotor.setVoltage(Constants.SPARK_MOTOR_VOLTAGE);
     }
 
-    //
     @Override
     public boolean isFinished() {
         return false;

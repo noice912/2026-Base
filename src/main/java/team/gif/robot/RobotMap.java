@@ -13,6 +13,5 @@ public abstract class RobotMap {
     public static final int CIM_MOTOR_ID = 10;
     public static final int NEO_MOTOR_ID = 45; // SparkMAX
 
-    // DIO (Digital Input/Output) channels on the RoboRIO
     public static final int LIMIT_SWITCH_ID = 9;
 }
