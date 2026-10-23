@@ -8,9 +8,6 @@ import team.gif.robot.Constants;
 import team.gif.robot.Robot;
 import team.gif.robot.RobotMap;
 
-/**
- * CIM motor driven by a TalonSRX
- */
 public class CIMMotor extends SubsystemBase {
     private final TalonSRX motor;
 
@@ -20,12 +17,7 @@ public class CIMMotor extends SubsystemBase {
         motor.setNeutralMode(NeutralMode.Brake);
     }
 
-    /**
-     * Runs the motor using percent output
-     * @param percent -1.0 (full backward) to 1.0 (full forward), 0 stops the motor
-     */
     public void setPercent(double percent) {
-        // Objective 1.10 - cut the power in half while the limit switch is pressed
         if (Robot.limitSwitch.isPressed()) {
             percent = percent * Constants.CIM_LIMIT_SWITCH_SCALE;
         }
