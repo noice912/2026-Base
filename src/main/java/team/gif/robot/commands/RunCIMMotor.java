@@ -6,35 +6,27 @@ import team.gif.robot.Robot;
 public class RunCIMMotor extends Command {
     private final double percent;
 
-    /**
-     * Runs the CIM motor at a percent output until the command ends
-     * @param percent positive = forward, negative = backward
-     */
     public RunCIMMotor(double percent) {
         super();
         this.percent = percent;
         addRequirements(Robot.cimMotor);
     }
 
-    // Called when the command is initially scheduled.
     @Override
     public void initialize() {
         Robot.cimMotor.setPercent(percent);
     }
 
-    // Called every time the scheduler runs (~20ms) while the command is scheduled
     @Override
     public void execute() {}
 
-    // Return true when the command should end, false if it should continue. Runs every ~20ms.
     @Override
     public boolean isFinished() {
-        return false; // keep running until the button is released
+        return false;
     }
 
-    // Called when the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        Robot.cimMotor.setPercent(0); // stop the motor when the button is released
+        Robot.cimMotor.setPercent(0);
     }
 }
