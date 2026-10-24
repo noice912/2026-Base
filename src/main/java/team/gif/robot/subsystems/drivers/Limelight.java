@@ -3,9 +3,7 @@ package team.gif.robot.subsystems.drivers;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
-
 public class Limelight {
-
     private final NetworkTable table;
 
     public static final int LED_PIPELINE = 0;
@@ -45,7 +43,6 @@ public class Limelight {
         setLEDMode(1);
     }
 
-
     public void setCamMode(int mode) {
         if (mode >= 0 && mode <= 1) {
             table.getEntry("camMode").setNumber(mode);
@@ -56,7 +53,6 @@ public class Limelight {
     public void setPipeline(int pipeline) {
         if (pipeline >= 0 && pipeline <= 9) {
             table.getEntry("pipeline").setNumber(pipeline);
-
         }
     }
 

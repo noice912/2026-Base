@@ -13,7 +13,6 @@ public class NEOMotor extends SubsystemBase {
     private final SparkMax motor;
 
     public NEOMotor() {
-
         motor = new SparkMax(RobotMap.NEO_MOTOR_ID, MotorType.kBrushless);
         SparkMaxConfig motorConfig = new SparkMaxConfig();
         motorConfig.idleMode(SparkBaseConfig.IdleMode.kBrake);
@@ -21,9 +20,7 @@ public class NEOMotor extends SubsystemBase {
         motor.configure(motorConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     }
 
-
     public void setVoltage(double volts) {
         motor.setVoltage(volts);
     }
-
 }

@@ -5,7 +5,6 @@ import team.gif.robot.Constants;
 import team.gif.robot.Robot;
 
 public class CIMJoystickControl extends Command {
-
     public CIMJoystickControl() {
         super();
         addRequirements(Robot.cimMotor);
