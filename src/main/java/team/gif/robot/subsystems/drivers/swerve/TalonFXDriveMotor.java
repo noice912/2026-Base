@@ -19,10 +19,6 @@ public class TalonFXDriveMotor implements DriveMotor {
         velocityConversion = constants.DRIVE_ENCODER_RPM_2_METER_PER_SEC;
     }
 
-    /**
-     * Configures a TalonFX to be a drive motor on a swerve drivetrain.
-     * Sets empty TalonFX config, and sets it to brake mode.
-     */
     public void configure(boolean inverted) {
         TalonFXConfigurator talonFXConfig = motor.getConfigurator();
 

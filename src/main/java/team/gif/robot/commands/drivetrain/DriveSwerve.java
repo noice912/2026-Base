@@ -25,19 +25,17 @@ public class DriveSwerve extends Command {
             double forwardSign;
             double strafeSign;
 
-            double forward = -Robot.oi.driver.getLeftY(); // need to invert because -Y is away, +Y is pull back
-            forward = (Math.abs(forward) > Constants.Joystick.DEADBAND) ? forward : 0.0; //0.00001;
+            double forward = -Robot.oi.driver.getLeftY();
+            forward = (Math.abs(forward) > Constants.Joystick.DEADBAND) ? forward : 0.0;
 
-            double strafe = -Robot.oi.driver.getLeftX(); // need to invert because -X is left, +X is right
+            double strafe = -Robot.oi.driver.getLeftX();
             strafe = (Math.abs(strafe) > Constants.Joystick.DEADBAND) ? strafe : 0.0;
 
-            double rot = -Robot.oi.driver.getRightX(); // need to invert because left is negative, right is positive
+            double rot = -Robot.oi.driver.getRightX();
             rot = (Math.abs(rot) > Constants.Joystick.DEADBAND) ? rot : 0.0;
 
             forwardSign = forward/Math.abs(forward);
             strafeSign = strafe/Math.abs(strafe);
-            // Use a parabolic curve (instead if linear) for the joystick to speed ratio
-            // This allows for small joystick inputs to use slower speeds
             forward = Math.abs(forward) * forward;
             strafe = Math.abs(strafe) * strafe;
 
@@ -52,11 +50,9 @@ public class DriveSwerve extends Command {
             if( Double.isNaN(strafe) )
                 strafe = strafeSign;
 
-            //Forward speed, Sideways speed, Rotation Speed
             forward = forwardLimiter.calculate(forward) * Robot.swerveDrive.getDrivePace().getValue();
             strafe = strafeLimiter.calculate(strafe) * Robot.swerveDrive.getDrivePace().getValue();
 
-            // slow dpwn the rotation by converting the linear response to a curve
             if (rot < 0 ) {
                 rot = rot * -rot;
             } else {
@@ -65,7 +61,6 @@ public class DriveSwerve extends Command {
 
              rot = turnLimiter.calculate(rot) * Robot.swerveConfig.constants.PHYSICAL_MAX_ANGULAR_SPEED_RADIANS_PER_SECOND;
 
-            // the robot starts facing the driver station so for this year negating y and x
             Robot.swerveDrive.drive(forward, strafe, rot);
     }
 

@@ -9,11 +9,6 @@ import team.gif.robot.subsystems.drivers.swerve.utilities.Encoder;
 public class CANCoderEncoder implements Encoder {
     private final CANcoder encoder;
 
-    /**
-     * Creates a CANCoder for use as a
-     * turn encoder in a swerve drivetrain
-     * @param id - The CAN ID of the encoder
-     */
     public CANCoderEncoder(int id) {
         encoder = new CANcoder(id);
     }
@@ -24,18 +19,10 @@ public class CANCoderEncoder implements Encoder {
 
     }
 
-    /**
-     * Returns the position of the CANcoder as a value from -0.5-0.5
-     * @return double - current encoder position
-     */
     public double getTicks() {
         return encoder.getAbsolutePosition().getValueAsDouble();
     }
 
-    /**
-     * Returns the current position in degrees rom -180-180
-     * @return double - position of the wheel in degrees
-     */
     public double getDegrees() {
         return getTicks() * 360;
 

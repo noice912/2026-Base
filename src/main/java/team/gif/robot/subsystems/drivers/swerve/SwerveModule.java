@@ -11,12 +11,10 @@ import team.gif.robot.subsystems.drivers.swerve.utilities.Encoder;
 import team.gif.robot.subsystems.drivers.swerve.utilities.TurnMotor;
 
 public class SwerveModule {
-    /* ------ Devices ------*/
     private final DriveMotor driveMotor;
     private final TurnMotor turnMotor;
     private final Encoder encoder;
 
-    /* ----- PID Constants -----*/
     private final double P;
     private final SimpleMotorFeedforward driveFF;
     private final double turnFF;
@@ -58,14 +56,7 @@ public class SwerveModule {
         this.maxDriveTemp = maxDriveTemp;
     }
 
-    /**
-     * Get the active state of the swerve module
-     * @return Returns the active state of the given swerveModule
-     */
     public SwerveModuleState getState() {
-        //We divide velocity by 2π because it is returned
-        //in revolutions per second and we need it
-        //in radians per seconds
         return new SwerveModuleState(driveMotor.getVelocity(),
                 new Rotation2d(getTurningHeading()));
     }
@@ -81,41 +72,23 @@ public class SwerveModule {
     public double getDriveVelocity() {
         return driveMotor.getVelocity();
     }
-    /**
-     * Get the heading of the swerve module
-     * @return Returns the heading of the module in radians as a double
-     */
     public double getTurningHeading() {
         double heading = Units.degreesToRadians(getTurningHeadingDegrees());
         heading %= 2 * Math.PI;
         return heading;
     }
 
-    /**
-     * Get the heading of the swerve module
-     * @return Returns the heading of the module in degrees as a double
-     */
     public double getTurningHeadingDegrees() {
         return encoder.getDegrees() - turnOffset;
     }
 
-    /**
-     * @return The target angle of the module in radians as a double
-     */
     public double getTargetAngle() {
         return targetAngle;
     }
 
-    /**
-     * Get the target velocity of the swerve module
-     * @return The target velocity of the module in meters per second as a double
-     */
     public double getTargetVelocity() {
         return targetVelocity;
     }
-    /**
-     * Reset the wheel to its 0 positions
-     */
     public void resetWheel() {
         final double error = getTurningHeading();
         final double ff = turnFF * Math.abs(error) / error;
@@ -124,32 +97,15 @@ public class SwerveModule {
         turnMotor.set(turnOutput);
     }
 
-    /**
-     * Find the reverse of a given angle (i.e. pi/4->7pi/4)
-     * @param radians the angle in radians to reverse
-     * @return the reversed angle
-     */
     private double findRevAngle(double radians) {
         return (Math.PI * 2 + radians) % (2 * Math.PI) - Math.PI;
     }
 
-    /**
-     * Finds the distance in ticks between two setpoints
-     * @param setpoint initial/current point
-     * @param position desired position
-     * @return the distance between the two point
-     */
     private double getDistance(double setpoint, double position) {
         return Math.abs(setpoint - position);
     }
 
-    /**
-     * Optimize the swerve module state by setting it to the closest equivalent vector
-     * @param original the original swerve module state
-     * @return the optimized swerve module state
-     */
     private SwerveModuleState optimizeState(SwerveModuleState original) {
-        // Compute all options for a setpoint
         double position = getTurningHeading();
         double setpoint = original.angle.getRadians();
         double forward = setpoint + (2 * Math.PI);
@@ -158,7 +114,6 @@ public class SwerveModule {
         double antiforward = antisetpoint + (2 * Math.PI);
         double antireverse = antisetpoint - (2 * Math.PI);
 
-        // Find setpoint option with minimum distance
         double[] alternatives = { forward, reverse, antisetpoint, antiforward, antireverse };
         double min = setpoint;
         double minDistance = getDistance(setpoint, position);
@@ -172,7 +127,6 @@ public class SwerveModule {
             }
         }
 
-        // Figure out the speed. Anti- directions should be negative.
         double speed = original.speedMetersPerSecond;
         if (minIndex > 1) {
             speed *= -1;
@@ -181,12 +135,6 @@ public class SwerveModule {
         return new SwerveModuleState(speed, new Rotation2d(min));
     }
 
-    /**
-     * Set the desired state of the swerve module
-     * @param state The desired state of the swerve module
-     * @implNote This function does not account for the current drivePace or
-     * Max module velocity. These should be implemented before this function is called
-     */
     public void setDesiredState(SwerveModuleState state) {
         SwerveModuleState stateOptimized = optimizeState(state);
         targetAngle = stateOptimized.angle.getRadians();
@@ -196,9 +144,7 @@ public class SwerveModule {
         final double error = getTurningHeading() - stateOptimized.angle.getRadians();
 
 
-        //if error is negative, FF should also be negative
         final double ff = turnFF * Math.abs(error) / error;
-        //accum += error;
         final double turnOutput = ff + (P * error);
         driveMotor.setVoltage(driveOutput);
         turnMotor.set(turnOutput);
@@ -218,9 +164,7 @@ public class SwerveModule {
             error = Math.abs(error) * -1;
         }
 
-        //if error is negative, FF should also be negative
         final double ff = turnFF * Math.abs(error) / error;
-        //accum += error;
         final double turnOutput = ff + (P * error);
         driveMotor.setVoltage(driveOutput);
         turnMotor.set(turnOutput);
@@ -234,25 +178,15 @@ public class SwerveModule {
 
     }
 
-    /**
-     * Stop the swerve modules
-     */
     public void stop() {
         driveMotor.set(0);
         turnMotor.set(0);
     }
 
-    /**
-     * Get the position of the swerve module
-     * @return the position of the swerve module
-     */
     public SwerveModulePosition getPosition() {
         return new SwerveModulePosition(driveMotor.getPosition(), new Rotation2d(getTurningHeading()));
     }
 
-    /**
-     * Resets the drive encoder
-     */
     public void resetDriveEncoders() {
         driveMotor.resetEncoder();
     }
