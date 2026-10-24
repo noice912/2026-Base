@@ -82,8 +82,6 @@ public class SwerveDrivetrain extends SubsystemBase {
     
     public boolean debugMode = false;
 
-    // Network Table publishers for the swerve
-    // states so that we can use them in advantage scope
     private static final StructArrayPublisher<SwerveModuleState> targetPublisher = NetworkTableInstance.getDefault()
             .getStructArrayTopic("TargetSwerveState", SwerveModuleState.struct).publish();
     private static final StructArrayPublisher<SwerveModuleState> actualPublisher = NetworkTableInstance.getDefault()
@@ -94,9 +92,6 @@ public class SwerveDrivetrain extends SubsystemBase {
             .getStructTopic("ChassisSpeeds", ChassisSpeeds.struct).publish();
 
 
-    /**
-     * Constructor for swerve drivetrain using 4 swerve modules using Kraken x60s to drive and Falcon500 to turn
-     */
     public SwerveDrivetrain(SwerveConfiguration config) {
         super();
 
@@ -117,10 +112,6 @@ public class SwerveDrivetrain extends SubsystemBase {
         configPathPlanner();
     }
 
-    /**
-     * Periodic function
-     * - constantly update the odometry
-     */
     @Override
     public void periodic() {
         poseEstimator.update(
@@ -128,44 +119,20 @@ public class SwerveDrivetrain extends SubsystemBase {
             getPosition()
         );
 
-        /*if (Robot.pigeon.getYawRate() < 720) {
-            for (String limelightName : limelightNames) {
-                LimelightHelpers.PoseEstimate estimate = LimelightHelpers.getBotPoseEstimate_wpiRed_MegaTag2(limelightName);
-                if(limelightEnabled && estimate != null && estimate.tagCount > 0) {
-                    poseEstimator.setVisionMeasurementStdDevs(VecBuilder.fill(.7,.7,9999999));
-                    poseEstimator.addVisionMeasurement(
-                            estimate.pose,
-                            estimate.timestampSeconds);
-                }
-            }
-        }*/
-
         if (debugMode) {
             posePublisher.set(poseEstimator.getEstimatedPosition());
             updateShuffleboardDebug();
         }
     }
 
-    /**
-     * Set the limelight enabled status
-     * @param enabled - enable limelight vision updates
-     */
     public void setLimelightEnabled(boolean enabled) {
         limelightEnabled = enabled;
     }
 
-    /**
-     * Get the limelight enabled status
-     * @return boolean for the current limelight enabled status
-     */
     public boolean getLimelightEnabled() {
         return limelightEnabled;
     }
 
-    /**
-     * Add a limelight to the list of limelights used for vision based odometry
-     * @param newLimelightName - the name of the limelight to add
-     */
     public void addLimelight(String newLimelightName) {
         String[] newArray = new String[limelightNames.length + 1];
         System.arraycopy(limelightNames, 0, newArray, 0, limelightNames.length);
@@ -173,27 +140,14 @@ public class SwerveDrivetrain extends SubsystemBase {
         limelightNames = newArray;
     }
 
-    /**
-     * Get the list of limelights used for vision based odometry
-     * @return String array of limelight names
-     */
     public String[] getLimelightNames() {
         return limelightNames;
     }
 
-    /**
-     * Reset the odometry to a given pose
-     *
-     * @param pose the pose to reset to
-     */
     public void resetOdometry(Pose2d pose) {
         poseEstimator.resetPosition(Robot.pigeon.getRotation2d(), new SwerveModulePosition[]{fL.getPosition(), fR.getPosition(), rL.getPosition(), rR.getPosition()}, pose);
     }
 
-    /**
-     * Get the robot relative speed
-     * @return ChassisSpeeds of the robot relative speed
-     */
     public ChassisSpeeds getRobotRelativeSpeed() {
         SwerveModuleState frontLeftState = new SwerveModuleState(fL.getDriveVelocity(), Rotation2d.fromDegrees(fL.getTurningHeadingDegrees()));
         SwerveModuleState frontRightState = new SwerveModuleState(fR.getDriveVelocity(), Rotation2d.fromDegrees(fR.getTurningHeadingDegrees()));
@@ -209,13 +163,6 @@ public class SwerveDrivetrain extends SubsystemBase {
         return speed;
     }
 
-    /**
-     * Drive the bot with given params - always field relative
-     *
-     * @param x   dForward
-     * @param y   dLeft
-     * @param rot dRot
-     */
     public void drive(double x, double y, double rot) {
         SwerveModuleState[] swerveModuleStates =
                 constants.DRIVE_KINEMATICS.toSwerveModuleStates(
@@ -241,12 +188,6 @@ public class SwerveDrivetrain extends SubsystemBase {
         drive(0,0,0);
     }
 
-    /**
-     * Set the desired states for each of the 4 swerve modules using a SwerveModuleState array
-     *
-     * @param desiredStates SwerveModuleState array of desired states for each of the modules
-     * @implNote Only for use in the SwerveDrivetrain class and by pathplanner, for any general use {@link SwerveDrivetrain#drive(double x, double y, double rot)}
-     */
      public void setModuleStates(SwerveModuleState[] desiredStates) {
         SwerveDriveKinematics.desaturateWheelSpeeds(
                 desiredStates, drivePace.getValue()
@@ -258,11 +199,6 @@ public class SwerveDrivetrain extends SubsystemBase {
         rR.setDesiredState(desiredStates[3]);
     }
 
-    /**
-     * Set the desired states for each of the 4 swerve modules using a ChassisSpeeds class
-     * @param chassisSpeeds Robot Relative ChassisSpeeds to apply to wheel speeds
-     * @implNote Use only in {@link SwerveDrivetrain}
-     */
     public void setModuleChassisSpeeds(ChassisSpeeds chassisSpeeds) {
         SwerveModuleState[] swerveModuleStates = constants.DRIVE_KINEMATICS.toSwerveModuleStates(chassisSpeeds);
         SwerveDriveKinematics.desaturateWheelSpeeds(
@@ -286,9 +222,6 @@ public class SwerveDrivetrain extends SubsystemBase {
         }
     }
 
-    /**
-     * This set moves all the modules to 90 degrees. It turns the modules inward to prevent the robot from moving
-     */
     public void modulesTo90() {
         SwerveModuleState state90 = new SwerveModuleState(0, Rotation2d.fromDegrees(90));
         fL.setDesiredState(state90, true);
@@ -298,18 +231,10 @@ public class SwerveDrivetrain extends SubsystemBase {
 
     }
 
-    /**
-     * Get the current pose of the robot
-     *
-     * @return The current pose of the robot (Pose2D)
-     */
     public Pose2d getPose() {
         return poseEstimator.getEstimatedPosition();
     }
 
-    /**
-     * Stop all the modules
-     */
     public void stopModules() {
         fL.stop();
         fR.stop();
@@ -317,19 +242,11 @@ public class SwerveDrivetrain extends SubsystemBase {
         rL.stop();
     }
 
-    /**
-     * Get the current position of each of the swerve modules
-     *
-     * @return An array in form fL -> fR -> rL -> rR of each of the module positions
-     */
     public SwerveModulePosition[] getPosition() {
 
         return new SwerveModulePosition[]{fL.getPosition(), fR.getPosition(), rL.getPosition(), rR.getPosition()};
     }
 
-    /**
-     * Reset the drive encoders
-     */
     public void resetDriveEncoders() {
         fL.resetDriveEncoders();
         fR.resetDriveEncoders();
@@ -337,20 +254,10 @@ public class SwerveDrivetrain extends SubsystemBase {
         rR.resetDriveEncoders();
     }
 
-    /**
-     * set the drivePace settings for the drivetrain
-     *
-     * @param drivePace the drivePace to set
-     */
     public void setDrivePace(drivePace drivePace) {
         this.drivePace = drivePace;
     }
 
-    /**
-     * Get the current drivePace settings
-     *
-     * @return the current drivePace settings
-     */
     public drivePace getDrivePace() {
         return drivePace;
     }
@@ -379,7 +286,6 @@ public class SwerveDrivetrain extends SubsystemBase {
         rLTurnMotor = turnMotorFactory.create(deviceMap.REAR_LEFT_TURNING_MOTOR_ID);
         rRTurnMotor = turnMotorFactory.create(deviceMap.REAR_RIGHT_TURNING_MOTOR_ID);
 
-        // In case the turn motor is a TalonSRX that has the encoder connected to the data port
         if(encoderFactory == null && fLTurnMotor instanceof TalonSRXTurnMotorEncoder) {
             fLEncoder = (Encoder) fLTurnMotor;
             fREncoder = (Encoder) fRTurnMotor;
@@ -479,21 +385,6 @@ public class SwerveDrivetrain extends SubsystemBase {
     public double rLDriveTemp() { return rLDriveMotor.getTemp(); }
     public double rRDriveTemp() { return rRDriveMotor.getTemp(); }
 
-    /**
-     * Enables debug mode. Adds the following to the network table:
-     * <ul>
-     *     <li>Heading for each module (Gyro Widget)</li>
-     *     <li>Actual Swerve State (Elastic Widget)</li>
-     *     <li>Target Swerve State (Elastic Widget)</li>
-     *     <li>Actual Swerve State (AdvantageScope)</li>
-     *     <li>Target Swerve State (AdvantageScope)</li>
-     *     <li>Target Chassis Speed (AdvantageScope</li>
-     *     <li>Raw Encoder Readings</li>
-     *     <li>Raw Encoder Degrees</li>
-     *     <li>Raw Encoder Radians</li>
-     *     <li>Raw Drive Encoder</li>
-     * </ul>
-     */
     public void enableDebugMode() {
         debugMode = true;
         SmartDashboard.putData("Swerve/FL Heading", builder -> {
@@ -654,22 +545,10 @@ public class SwerveDrivetrain extends SubsystemBase {
         }
     }
 
-    /**
-     * Returns a command that will execute a quasistatic test in the given direction.
-     *
-     * @param motor The motor to run the test on either "drive" or "turn"
-     * @param direction The direction (forward or reverse) to run the test in
-     */
     public Command sysIdQuasistatic(String motor, SysIdRoutine.Direction direction) {
         return getSysIdRoutine(motor).quasistatic(direction);
     }
 
-    /**
-     * Returns a command that will execute a dynamic test in the given direction.
-     *
-     * @param motor The motor to run the test on either "drive" or "turn"
-     * @param direction The direction (forward or reverse) to run the test in
-     */
     public Command sysIdDynamic(String motor, SysIdRoutine.Direction direction) {
         return getSysIdRoutine(motor).dynamic(direction);
     }

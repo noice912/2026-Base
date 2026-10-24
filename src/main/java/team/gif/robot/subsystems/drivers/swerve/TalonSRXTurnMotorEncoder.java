@@ -10,23 +10,16 @@ import team.gif.robot.subsystems.drivers.swerve.utilities.TurnMotor;
 public class TalonSRXTurnMotorEncoder implements TurnMotor, Encoder {
     private final TalonSRX motor;
 
-    /**
-     * Initiates a TalonSRX with a connected magencoder as
-     * and encoder for swerve drive
-      * @param id int - the CAN id of the talon
-     */
     public TalonSRXTurnMotorEncoder(int id) {
         motor = new TalonSRX(id);
     }
 
-    //Motor configuration
     public void configure(boolean inverted) {
         motor.configFactoryDefault();
         motor.setNeutralMode(NeutralMode.Brake);
         motor.setInverted(inverted);
     }
 
-    //Encoder configuration
     public void configure() {
         motor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute);
         motor.configFeedbackNotContinuous(true, 0);
@@ -48,7 +41,6 @@ public class TalonSRXTurnMotorEncoder implements TurnMotor, Encoder {
     }
 
     public void setVoltage(double voltage) {
-        // Talon can't set voltage so we convert it to a percent output based on the input voltage
         motor.set(ControlMode.PercentOutput, voltage / motor.getBusVoltage());
     }
 
@@ -65,9 +57,7 @@ public class TalonSRXTurnMotorEncoder implements TurnMotor, Encoder {
     }
 
     public double getVelocity() {
-        //ticks per 100ms * 10 (to convert to seconds) / 4096 (to convert to rotations)
         return 0;
-        // return motor.getSelectedSensorVelocity() * 10 / 4096;
     }
 
     public void reset() {

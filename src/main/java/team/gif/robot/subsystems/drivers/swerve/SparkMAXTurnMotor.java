@@ -12,12 +12,6 @@ public class SparkMAXTurnMotor implements TurnMotor {
     private final double positionConversion;
     private final double velocityConversion;
 
-    /**
-     * Creates a sparkmax motor (NEO) to be used
-     * as a turn motor on a swerve drivetrain.
-     * This should never be used except for that purpose.
-     * @param id the CAN ID of the motor controller
-     */
     public SparkMAXTurnMotor(int id, SwerveConstants constants) {
         motor = new SparkMax(id, SparkLowLevel.MotorType.kBrushless);
         positionConversion = constants.TURNING_ENCODER_ROT_TO_RAD;
