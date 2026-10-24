@@ -6,9 +6,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import team.gif.robot.commands.RunCIMMotor;
 import team.gif.robot.commands.TimeStamp;
 
-public class
-OI {
-
+public class OI {
     public final CommandXboxController driver = new CommandXboxController(RobotMap.DRIVER_CONTROLLER_ID);
     public final CommandXboxController aux = new CommandXboxController(RobotMap.AUX_CONTROLLER_ID);
     public final CommandXboxController test = new CommandXboxController(RobotMap.TEST_CONTROLLER_ID);
@@ -71,8 +69,5 @@ OI {
 
         dX.whileTrue(new RunCIMMotor(Constants.CIM_MOTOR_PERCENT));
         dY.whileTrue(new RunCIMMotor(-Constants.CIM_MOTOR_PERCENT));
-
-
-
     }
 }
