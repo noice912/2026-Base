@@ -61,5 +61,4 @@ public class SparkMaxDriveMotor implements DriveMotor {
     public void resetEncoder() {
         motor.getEncoder().setPosition(0);
     }
-
 }

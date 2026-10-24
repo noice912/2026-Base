@@ -46,7 +46,6 @@ import static edu.wpi.first.units.Units.Radians;
 import static edu.wpi.first.units.Units.RadiansPerSecond;
 import static edu.wpi.first.units.Units.Volts;
 
-
 public class SwerveDrivetrain extends SubsystemBase {
     private final SwerveMap deviceMap;
     private final SwerveConstants constants;
@@ -79,7 +78,7 @@ public class SwerveDrivetrain extends SubsystemBase {
 
     public boolean limelightEnabled = true;
     public String[] limelightNames = new String[] {};
-    
+
     public boolean debugMode = false;
 
     private static final StructArrayPublisher<SwerveModuleState> targetPublisher = NetworkTableInstance.getDefault()
@@ -90,7 +89,6 @@ public class SwerveDrivetrain extends SubsystemBase {
             .getStructTopic("EstimatedPose", Pose2d.struct).publish();
     private static final StructPublisher<ChassisSpeeds> chassisSpeedsStructPublisher = NetworkTableInstance.getDefault()
             .getStructTopic("ChassisSpeeds", ChassisSpeeds.struct).publish();
-
 
     public SwerveDrivetrain(SwerveConfiguration config) {
         super();
@@ -240,7 +238,6 @@ public class SwerveDrivetrain extends SubsystemBase {
         fR.setDesiredState(state90, false);
         rL.setDesiredState(state90, true);
         rR.setDesiredState(state90, false);
-
     }
 
     public Pose2d getPose() {
@@ -255,7 +252,6 @@ public class SwerveDrivetrain extends SubsystemBase {
     }
 
     public SwerveModulePosition[] getPosition() {
-
         return new SwerveModulePosition[]{fL.getPosition(), fR.getPosition(), rL.getPosition(), rR.getPosition()};
     }
 
@@ -287,7 +283,6 @@ public class SwerveDrivetrain extends SubsystemBase {
     }
 
     private void configModules() {
-
         fLDriveMotor = driveMotorFactory.create(deviceMap.FRONT_LEFT_DRIVE_MOTOR_ID, constants);
         fRDriveMotor = driveMotorFactory.create(deviceMap.FRONT_RIGHT_DRIVE_MOTOR_ID, constants);
         rLDriveMotor = driveMotorFactory.create(deviceMap.REAR_LEFT_DRIVE_MOTOR_ID, constants);
@@ -310,7 +305,6 @@ public class SwerveDrivetrain extends SubsystemBase {
             rLEncoder = encoderFactory.create(deviceMap.REAR_LEFT_ENCODER_ID);
             rREncoder = encoderFactory.create(deviceMap.REAR_RIGHT_ENCODER_ID);
         }
-
 
         fL = new SwerveModule(
                 fLDriveMotor,
@@ -488,7 +482,6 @@ public class SwerveDrivetrain extends SubsystemBase {
     public SysIdRoutine getSysIdRoutine(String motors) {
         MutVoltage voltMut = Volts.mutable(0);
 
-
         if (motors.equals("drive")) {
             MutDistance posMut = Meters.mutable(0);
             MutLinearVelocity vMut= MetersPerSecond.mutable(0);
@@ -518,7 +511,6 @@ public class SwerveDrivetrain extends SubsystemBase {
                                         .voltage(voltMut.mut_replace(rRDriveMotor.getVoltage(), Volts))
                                         .linearPosition(posMut.mut_replace(rRDriveMotor.getPosition(), Meters))
                                         .linearVelocity(vMut.mut_replace(rRDriveMotor.getVelocity(), MetersPerSecond));
-
                             },
                             this));
         } else if (motors.equals("turn")) {
@@ -550,7 +542,6 @@ public class SwerveDrivetrain extends SubsystemBase {
                                     .angularPosition(thetaMut.mut_replace(rREncoder.getRadians(), Radians))
                                     .angularVelocity(thetaVMut.mut_replace(rREncoder.getVelocity(), RadiansPerSecond));
                     }, this));
-
         } else {
             DriverStation.reportError("Invalid motor type at SwerveDrivetrainMk4.getSysIdRoutine", false);
             return null;

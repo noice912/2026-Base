@@ -33,7 +33,6 @@ public class TalonFXDriveMotor implements DriveMotor {
         return motor.getDeviceTemp().getValueAsDouble();
     }
 
-
     public double getVelocity() {
         return motor.getVelocity().getValueAsDouble() * positionConversion;
     }
@@ -41,7 +40,6 @@ public class TalonFXDriveMotor implements DriveMotor {
     public double getPosition() {
         return motor.getPosition().getValueAsDouble() * velocityConversion;
     }
-
 
     public double getOutput() {
         return motor.get();
@@ -62,5 +60,4 @@ public class TalonFXDriveMotor implements DriveMotor {
     public void resetEncoder() {
         motor.setPosition(0);
     }
-
 }

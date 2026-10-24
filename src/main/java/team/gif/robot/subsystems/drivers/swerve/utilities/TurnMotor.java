@@ -1,7 +1,6 @@
 package team.gif.robot.subsystems.drivers.swerve.utilities;
 
 public interface TurnMotor {
-
     void configure(boolean inverted);
 
     double getOutput();
@@ -11,5 +10,4 @@ public interface TurnMotor {
     void set(double percentOutput);
 
     void setVoltage(double voltage);
-
 }
