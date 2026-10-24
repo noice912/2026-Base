@@ -15,7 +15,6 @@ public class NEOMotor extends SubsystemBase {
     private final RelativeEncoder encoder;
 
     public NEOMotor() {
-
         motor = new SparkMax(RobotMap.NEO_MOTOR_ID, MotorType.kBrushless);
         SparkMaxConfig motorConfig = new SparkMaxConfig();
         motorConfig.idleMode(SparkBaseConfig.IdleMode.kBrake);
@@ -38,9 +37,7 @@ public class NEOMotor extends SubsystemBase {
         return encoder.getVelocity();
     }
 
-
     public void setVoltage(double volts) {
         motor.setVoltage(volts);
     }
-
 }
