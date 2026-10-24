@@ -18,5 +18,4 @@ public interface DriveMotor {
     double getVoltage();
 
     void resetEncoder();
-
 }

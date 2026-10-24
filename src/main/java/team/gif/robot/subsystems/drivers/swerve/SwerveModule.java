@@ -38,7 +38,6 @@ public class SwerveModule {
             double P,
             double maxDriveTemp
     ) {
-
         this.driveMotor = driveMotor;
         this.turnMotor = turnMotor;
         this.encoder = encoder;
@@ -143,7 +142,6 @@ public class SwerveModule {
         double driveOutput = driveFF.calculate(stateOptimized.speedMetersPerSecond);
         final double error = getTurningHeading() - stateOptimized.angle.getRadians();
 
-
         final double ff = turnFF * Math.abs(error) / error;
         final double turnOutput = ff + (P * error);
         driveMotor.setVoltage(driveOutput);
@@ -175,7 +173,6 @@ public class SwerveModule {
         final double ff = turnFF * Math.abs(error) / error;
         final double turnOutput = ff + (P * error);
         turnMotor.set(turnOutput);
-
     }
 
     public void stop() {

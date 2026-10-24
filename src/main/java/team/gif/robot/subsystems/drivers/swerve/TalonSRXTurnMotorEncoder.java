@@ -63,5 +63,4 @@ public class TalonSRXTurnMotorEncoder implements TurnMotor, Encoder {
     public void reset() {
         motor.setSelectedSensorPosition(0);
     }
-
 }

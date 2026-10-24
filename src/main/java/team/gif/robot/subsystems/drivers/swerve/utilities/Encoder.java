@@ -1,7 +1,6 @@
 package team.gif.robot.subsystems.drivers.swerve.utilities;
 
 public interface Encoder {
-
     void configure();
 
     double getTicks();
@@ -13,5 +12,4 @@ public interface Encoder {
     double getVelocity();
 
     void reset();
-
 }

@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Pigeon2_0 extends SubsystemBase {
-
     public static Pigeon2 _pigeon;
 
     public Pigeon2_0(int PigeonID) {

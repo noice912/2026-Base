@@ -5,7 +5,6 @@ import com.ctre.phoenix6.configs.MagnetSensorConfigs;
 import com.ctre.phoenix6.hardware.CANcoder;
 import team.gif.robot.subsystems.drivers.swerve.utilities.Encoder;
 
-
 public class CANCoderEncoder implements Encoder {
     private final CANcoder encoder;
 
@@ -16,7 +15,6 @@ public class CANCoderEncoder implements Encoder {
     public void configure() {
         MagnetSensorConfigs encoderConfig = new MagnetSensorConfigs().withAbsoluteSensorDiscontinuityPoint(0.5);
         encoder.getConfigurator().apply(new CANcoderConfiguration().withMagnetSensor(encoderConfig));
-
     }
 
     public double getTicks() {
@@ -25,7 +23,6 @@ public class CANCoderEncoder implements Encoder {
 
     public double getDegrees() {
         return getTicks() * 360;
-
     }
 
     public double getRadians() {
@@ -39,5 +36,4 @@ public class CANCoderEncoder implements Encoder {
     public void reset() {
         encoder.setPosition(0);
     }
-
 }

@@ -32,7 +32,6 @@ public class SparkMAXTurnMotor implements TurnMotor {
 
     public double getOutput() {
         return motor.getAppliedOutput();
-
     }
 
     public double getVoltage() {
@@ -41,7 +40,6 @@ public class SparkMAXTurnMotor implements TurnMotor {
 
     public void set(double percentOutput) {
         motor.set(percentOutput);
-
     }
 
     public void setVoltage(double voltage) {
