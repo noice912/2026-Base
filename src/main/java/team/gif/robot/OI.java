@@ -12,14 +12,6 @@ import team.gif.robot.commands.TimeStamp;
 
 public class
 OI {
-    /*
-     * Instantiate all joysticks/controllers and their buttons here
-     *
-     * Examples:
-     * public final CommandXboxController driver = new CommandXboxController(0);
-     *
-     * public final Trigger dA = driver.a();
-     */
 
     public final CommandXboxController driver = new CommandXboxController(RobotMap.DRIVER_CONTROLLER_ID);
     public final CommandXboxController aux = new CommandXboxController(RobotMap.AUX_CONTROLLER_ID);
@@ -79,33 +71,11 @@ OI {
     public OI() {
         DriverStation.silenceJoystickConnectionWarning(true);
 
-        /*
-         *
-         * Create controller actions here
-         *
-         * Usages:
-         * dRTrigger.whileTrue(new CollectCommand());
-         * dLTrigger.onTrue(new EjectCommand());
-         * dA.whileTrue(new RepeatCommand(new RapidFire());
-         * aStart.onTrue(new InstantCommand(Robot.elevator::zeroEncoder).ignoringDisable(true));
-         *
-         * onTrue (fka whenPressed)    Init->Execute repeats until IsFinished = true->End, will not start again at Init if still held down
-         * whileTrue (fka whenHeld)    Init->Execute repeats until IsFinished = true or button released->End, will not start again at Init if still held down
-         * whileTrue(new RepeatCommand()) (fka whileHeld)   Init->Execute repeats until IsFinished = true or button released->End, will start again at Init if still held down
-         *
-         * Simple Test:
-         *   aX.onTrue(new PrintCommand("aX"));
-         */
-
-        // Game 1
         dA.onTrue(new TimeStamp());
 
         dX.whileTrue(new RunCIMMotor(Constants.CIM_MOTOR_PERCENT));
         dY.whileTrue(new RunCIMMotor(-Constants.CIM_MOTOR_PERCENT));
         dA.whileTrue(new RunNEOVoltage());
-
-       /* dDPadUp.whileTrue(new RunNEOVoltage(Constants.NEO_VOLTAGE));
-        dDPadDown.whileTrue(new RunNEOVoltage(-Constants.NEO_VOLTAGE));*/
 
         dRBump.onTrue(new NEOGoToPosition(Constants.NEO_POSITION_SETPOINT));
         dLBump.onTrue(new NEOGoToPosition(0));
