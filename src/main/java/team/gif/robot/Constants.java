@@ -1,6 +1,5 @@
 package team.gif.robot;
 
-
 public final class Constants {
     public static final double DEBOUNCE_DEFAULT = 0.020;
 

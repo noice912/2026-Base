@@ -12,10 +12,8 @@ public class RunNEOVoltage extends Command {
         addRequirements(Robot.neoMotor);
     }
 
-    
     @Override
     public void initialize() {}
-
 
     @Override
     public void execute() {
@@ -26,7 +24,6 @@ public class RunNEOVoltage extends Command {
     public boolean isFinished() {
         return false;
     }
-
 
     @Override
     public void end(boolean interrupted) {
