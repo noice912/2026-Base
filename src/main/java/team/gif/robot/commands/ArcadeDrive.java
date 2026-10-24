@@ -6,7 +6,6 @@ import team.gif.robot.Constants;
 import team.gif.robot.Robot;
 
 public class ArcadeDrive extends Command {
-
     public ArcadeDrive() {
         super();
         addRequirements(Robot.drivetrain);

@@ -12,7 +12,6 @@ import team.gif.robot.subsystems.NEOMotor;
 import team.gif.robot.subsystems.Piston;
 import team.gif.robot.subsystems.drivers.Pigeon;
 
-
 public class Robot extends TimedRobot {
     private static Command autonomousCommand;
     private RobotContainer robotContainer;
@@ -26,10 +25,7 @@ public class Robot extends TimedRobot {
     public static Drivetrain drivetrain;
     private boolean lastLimitSwitchState;
 
-
     public static UI ui;
-
-
 
     public Robot() {
         robotContainer = new RobotContainer();
@@ -51,9 +47,7 @@ public class Robot extends TimedRobot {
         cimMotor.setDefaultCommand(new CIMJoystickControl());
 
         drivetrain.setDefaultCommand(new ArcadeDrive());
-
     }
-
 
     @Override
     public void robotPeriodic() {
@@ -62,7 +56,6 @@ public class Robot extends TimedRobot {
         ui.update();
 
         System.out.println(pigeon.get180Heading());
-
 
         boolean limitSwitchState = limitSwitch.isPressed();
         if (limitSwitchState != lastLimitSwitchState) {
