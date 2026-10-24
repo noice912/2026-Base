@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 
 public class TimeStamp extends Command {
-
     public TimeStamp() {
         super();
     }
@@ -20,11 +19,9 @@ public class TimeStamp extends Command {
 
     @Override
     public boolean isFinished() {
-
         return true;
     }
 
     @Override
     public void end(boolean interrupted) {}
 }
-
