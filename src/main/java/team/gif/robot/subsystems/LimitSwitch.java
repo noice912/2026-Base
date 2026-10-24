@@ -7,11 +7,9 @@ import team.gif.robot.RobotMap;
 public class LimitSwitch extends SubsystemBase {
     private final DigitalInput limitSwitch;
 
-
     public LimitSwitch() {
         limitSwitch = new DigitalInput(RobotMap.LIMIT_SWITCH_ID);
     }
-
 
     public boolean isPressed() {
         return limitSwitch.get();
