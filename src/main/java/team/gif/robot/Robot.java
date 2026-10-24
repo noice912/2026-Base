@@ -12,7 +12,6 @@ import team.gif.robot.subsystems.drivers.swerve.TalonFXDriveMotor;
 import team.gif.robot.subsystems.drivers.swerve.TalonFXTurnMotor;
 import team.gif.robot.subsystems.drivers.swerve.CANCoderEncoder;
 
-
 public class Robot extends TimedRobot {
     private static Command autonomousCommand;
     private RobotContainer robotContainer;
@@ -30,7 +29,6 @@ public class Robot extends TimedRobot {
     public static final boolean enableSwerveDebug = true;
     public static final boolean fullDashboard = true;
 
-
     public Robot() {
         robotContainer = new RobotContainer();
 
@@ -47,9 +45,7 @@ public class Robot extends TimedRobot {
 
         oi = new OI();
         ui = new UI();
-
     }
-
 
     @Override
     public void robotPeriodic() {
@@ -58,7 +54,6 @@ public class Robot extends TimedRobot {
         ui.update();
 
         System.out.println(pigeon.get180Heading());
-
 
         boolean limitSwitchState = limitSwitch.isPressed();
         if (limitSwitchState != lastLimitSwitchState) {
